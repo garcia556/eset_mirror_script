@@ -1,0 +1,54 @@
+<VirtualHost *:{{ eset_mirror_port_listen }}>
+         ServerName {{ eset_mirror_server_name }}
+         ServerAlias {{ eset_mirror_server_alias }}
+
+         ServerAdmin webmaster@domain.ru
+         DocumentRoot /var/www/eset_mirror_script/www
+         <Directory "/var/www/eset_mirror_script/www">
+
+                Options FollowSymLinks
+                AllowOverride All
+                Require all granted
+
+                RewriteEngine on
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA)\ Update.*BPC\ 6
+                RewriteRule ^(eset_upd/)?update.ver$ /eset_upd/ep6/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA|EFSW|ESFW)\ Update.*BPC\ 7
+                RewriteRule ^(eset_upd/)?dll/update.ver$ /eset_upd/ep7/dll/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA|EFSW|ESFW)\ Update.*BPC\ 8
+                RewriteRule ^(eset_upd/)?dll/update.ver$ /eset_upd/ep8/dll/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA|EFSW|ESFW)\ Update.*BPC\ 9
+                RewriteRule ^(eset_upd/)?dll/update.ver$ /eset_upd/ep9/dll/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA|EFSW|ESFW)\ Update.*BPC\ 10
+                RewriteRule ^(eset_upd/)?dll/update.ver$ /eset_upd/ep10/dll/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*(EES|EEA)\ Update.*BPC
+                RewriteRule ^(eset_upd/)?update\.ver$ - [F]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*Update.*BPC\ 5
+                RewriteRule ^(eset_upd/)?update.ver$ /eset_upd/v5/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*Update.*BPC\ ([3-8]+)
+                RewriteRule ^(eset_upd/)?update.ver$ /eset_upd/v3/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*Update.*BPC\ 9
+                RewriteRule ^(eset_upd/)?update.ver$ /eset_upd/v9/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*Update.*BPC\ (10|11)
+                RewriteRule ^(eset_upd/)?update.ver$ /eset_upd/v10/dll/update.ver [L]
+
+                RewriteCond %{HTTP_USER_AGENT} ^.*Update.*BPC\ (1[2-9]+)
+                RewriteRule ^(eset_upd/)?dll/update.ver$ /eset_upd/v%1/dll/update.ver [L]
+
+         </Directory>
+
+         ErrorLog /var/www/eset_mirror_script/log/apache-error.log
+         CustomLog /var/www/eset_mirror_script/log/apache-access.log combined
+
+ </VirtualHost>
+

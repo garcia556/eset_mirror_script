@@ -143,10 +143,10 @@ rotate = 1
 
 ; Default size of log file which will be rotated, default value is "100K".
 ; You may use postfixes: "B" (bytes), "K" (Kbytes), "M" (MBytes), "G" (GBytes)
-rotate_size = "100K"
+rotate_size = "10M"
 
 ; How many files will be rotated, default value is "5".
-rotate_qty = 5
+rotate_qty = 10
 
 [FIND]
 ; Enabling internal key autosearch build-in module.
@@ -162,7 +162,7 @@ auto = 1
 ; This parameter is responsible for the ability to take keys from the key server
 ; Trial keys, official, it is possible to take a unique key with the ability to automatically update the key
 ; If the option is enabled, then the key search does not occur.
-use_server = 1
+use_server = 0
 
 ; If the use_server parameter is enabled at the specified address, a request for keys
 ; Keys are always current, automatically updated
